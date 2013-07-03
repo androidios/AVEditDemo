@@ -37,6 +37,7 @@
 		6B34AE6E1783C63C00C2B7E3 /* VECollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B34AE671783C63C00C2B7E3 /* VECollectionViewCell.m */; };
 		6B34AE6F1783C63C00C2B7E3 /* VECollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B34AE691783C63C00C2B7E3 /* VECollectionViewLayout.m */; };
 		6B34AE711783C63C00C2B7E3 /* VEMediaPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B34AE6D1783C63C00C2B7E3 /* VEMediaPickerViewController.m */; };
+		6B34AE731784153700C2B7E3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B34AE721784153700C2B7E3 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		6B34AE691783C63C00C2B7E3 /* VECollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VECollectionViewLayout.m; sourceTree = "<group>"; };
 		6B34AE6C1783C63C00C2B7E3 /* VEMediaPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VEMediaPickerViewController.h; sourceTree = "<group>"; };
 		6B34AE6D1783C63C00C2B7E3 /* VEMediaPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VEMediaPickerViewController.m; sourceTree = "<group>"; };
+		6B34AE721784153700C2B7E3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AVEditDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AVEditDemo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				289536CB11B5DA6900575925 /* ReadMe.txt */,
+				6B34AE721784153700C2B7E3 /* Default-568h@2x.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -272,6 +275,7 @@
 				282BD9B811B5D3FD00547665 /* Placeholder.png in Resources */,
 				282BD9B911B5D3FD00547665 /* Player.xib in Resources */,
 				289536CC11B5DA6900575925 /* ReadMe.txt in Resources */,
+				6B34AE731784153700C2B7E3 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
