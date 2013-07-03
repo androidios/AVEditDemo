@@ -40,6 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
     UIBarButtonItem *cancelBarBtn = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction:)];
     UIBarButtonItem *videoBarBtn = [[UIBarButtonItem alloc] initWithTitle:@"Video" style:UIBarButtonItemStylePlain target:self action:@selector(videoAction:)];

@@ -541,25 +541,11 @@ UIImage *getImageWithRoundedUpperLeftCorner(UIImage *image, CGFloat radius)
             VEMediaPickerViewController *browserAlbum = [[[VEMediaPickerViewController alloc] init] autorelease];
             browserAlbum.delegate = self;
             self.assetBrowser = [[[UINavigationController alloc] initWithRootViewController:browserAlbum] autorelease];
-			[self.assetBrowser.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
-            
-            
 		}
         
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
 		_currentlyChoosingClipForSection = section;
         [self presentViewController:self.assetBrowser animated:YES completion:NULL];
-        
-//        //修改Nav push的默认动画：从下到上
-//        CATransition *transitionPush = [CATransition animation];
-//        transitionPush.duration = 0.5;
-//        transitionPush.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//        transitionPush.type = kCATransitionPush;
-//        transitionPush.subtype = kCATransitionFromTop;
-//        transitionPush.delegate = self;
-//        
-//        [self.navigationController.view.layer addAnimation:transitionPush forKey:nil];
-//        [self.navigationController pushViewController:[[VEMediaPickerViewController alloc] init] animated:YES];
         
 	}
 	else if ( section == kProjectSection ) 
