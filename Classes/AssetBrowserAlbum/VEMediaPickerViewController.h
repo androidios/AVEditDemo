@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "AssetBrowserController.h"
+
+@protocol AssetBrowserAlbumControllerDelegate;
 
 @interface VEMediaPickerViewController : UICollectionViewController
 {
-    id <AssetBrowserControllerDelegate> _delegate;
+    id <AssetBrowserAlbumControllerDelegate> _delegate;
 }
 
 @property(nonatomic, strong) NSMutableArray *usingAssetArray;
@@ -20,7 +21,17 @@
 @property(nonatomic, strong) NSMutableArray *videoAssetList;
 
 @property (strong, nonatomic) UIActivityIndicatorView *spinner;
-@property (nonatomic, assign) id<AssetBrowserControllerDelegate> delegate;
+@property (nonatomic, assign) id<AssetBrowserAlbumControllerDelegate> delegate;
+
+@end
+
+
+@protocol AssetBrowserAlbumControllerDelegate <NSObject>
+@optional
+
+// It is the delegate's responsibility to dismiss the modal view controller on the parent view controller.
+- (void)assetBrowserAlbum:(ALAsset *)asset;
+- (void)assetBrowserAlbumDidCancel;
 
 @end
 

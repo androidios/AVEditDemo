@@ -904,6 +904,8 @@ UIImage *getImageWithRoundedUpperLeftCorner(UIImage *image, CGFloat radius)
 - (void)assetBrowser:(AssetBrowserController *)assetBrowser didChooseAssets:(NSArray *)assets
 {
 	AssetBrowserItem *assetItem = [assets objectAtIndex:0];
+    
+    
 	AVURLAsset *asset = (AVURLAsset*)assetItem.asset;
 	BOOL animateInRows = NO;
 	NSArray *indexPathsToInsert = nil;
@@ -956,7 +958,8 @@ UIImage *getImageWithRoundedUpperLeftCorner(UIImage *image, CGFloat radius)
 	else {
 		[self.tableView reloadData];
 	}
-	[self dismissModalViewControllerAnimated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)insertIndexPaths:(NSArray*)indexPaths
@@ -968,7 +971,81 @@ UIImage *getImageWithRoundedUpperLeftCorner(UIImage *image, CGFloat radius)
 
 - (void)assetBrowserDidCancel
 {
-	[self dismissModalViewControllerAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+#pragma mark -
+#pragma mark AssetBrowserAlbum Delegate
+
+- (void)assetBrowserAlbum:(ALAsset *)alAsset
+{
+    NSLog(@"[ny] get the asset: %@",alAsset.thumbnail);
+    
+    //有ALAsset获得AVURLAsset
+    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+    NSURL *url = [representation url];
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
+    
+    UIImage *assetThumbnail = [UIImage imageWithCGImage:[alAsset thumbnail]];
+    
+    BOOL animateInRows = NO;
+	NSArray *indexPathsToInsert = nil;
+	
+	CGFloat screenScale = [[UIScreen mainScreen] scale];
+//	if (assetThumbnail == nil) {
+//		if (assetItem.canGenerateThumbnailImage) {
+//			CGFloat targetAspectRatio = 3.0/2.0;
+//			CGFloat targetHeight = self.tableView.rowHeight-1.0; //1 point is used for the divider line
+//			targetHeight *= screenScale;
+//			CGSize targetSize = CGSizeMake(targetHeight*targetAspectRatio, targetHeight);
+//			
+//			[assetItem generateThumbnailWithSize:targetSize fillMode:AssetBrowserItemFillModeCrop];
+//			assetThumbnail = [assetItem thumbnailImage];
+//		}
+//		else {
+//			assetThumbnail = [assetItem placeHolderImage];
+//		}
+//	}
+	
+	if (_currentlyChoosingClipForSection == kCommentarySection) {
+		self.commentary = asset;
+		self.commentaryThumbnail = assetThumbnail;
+		[self.tableView reloadData];
+	}
+	else {
+		animateInRows = [[self.clips objectAtIndex:_currentlyChoosingClipForSection] isKindOfClass:[NSNull class]];
+		[self.clips replaceObjectAtIndex:_currentlyChoosingClipForSection withObject:asset];
+		CMTimeRange timeRange = kCMTimeRangeZero;
+		timeRange.duration = asset.duration;
+		NSValue *timeRangeValue = [NSValue valueWithCMTimeRange:timeRange];
+		[self.clipTimeRanges replaceObjectAtIndex:_currentlyChoosingClipForSection withObject:timeRangeValue];
+		
+		CGFloat radius = 13.0*screenScale;
+		assetThumbnail = getImageWithRoundedUpperLeftCorner(assetThumbnail, radius);
+		[self.clipThumbnails replaceObjectAtIndex:_currentlyChoosingClipForSection withObject:assetThumbnail];
+		
+		NSRange range = {1,2};
+		indexPathsToInsert = [self indexPathsForSection:_currentlyChoosingClipForSection inRange:range];
+	}
+	_currentlyChoosingClipForSection = -1;
+	
+	if (animateInRows) {
+		// This signals viewWillAppear that it needs to insert some index paths.
+		_indexPathsToInsert = [indexPathsToInsert retain];
+		[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+	}
+	else {
+		[self.tableView reloadData];
+	}
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
+}
+
+- (void)assetBrowserAlbumDidCancel
+{
+	[self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark -

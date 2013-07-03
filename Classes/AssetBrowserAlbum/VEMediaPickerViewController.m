@@ -162,17 +162,22 @@
     NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
     NSString *type = [asset valueForProperty:ALAssetPropertyType];
     
-
+    NSLog(@"[ny] asset: %@",url);
     
+    if ([self.delegate respondsToSelector:@selector(assetBrowserAlbum:)]) {
+        [[self retain] autorelease];
+        [self.delegate assetBrowserAlbum:asset];
+    }
+         
     return NO;
 }
 
 #pragma mark - bar button action
 - (void)cancelAction:(id)sender {
     
-    if ([self.delegate respondsToSelector:@selector(assetBrowserDidCancel)]) {
+    if ([self.delegate respondsToSelector:@selector(assetBrowserAlbumDidCancel)]) {
 		[[self retain] autorelease];
-		[self.delegate assetBrowserDidCancel];
+		[self.delegate assetBrowserAlbumDidCancel];
 	}
 }
 
