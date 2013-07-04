@@ -157,9 +157,12 @@ static CGImageRef createStarImage(CGFloat radius)
 		AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
 		[compositionVideoTrack insertTimeRange:timeRangeInAsset ofTrack:clipVideoTrack atTime:nextClipStartTime error:nil];
 		
-		AVAssetTrack *clipAudioTrack = [[asset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
-		[compositionAudioTrack insertTimeRange:timeRangeInAsset ofTrack:clipAudioTrack atTime:nextClipStartTime error:nil];
-		
+        //视频文件可能没有音频轨道，也就是静音的
+        if ([[asset tracksWithMediaType:AVMediaTypeAudio] count] != 0) {
+            AVAssetTrack *clipAudioTrack = [[asset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+            [compositionAudioTrack insertTimeRange:timeRangeInAsset ofTrack:clipAudioTrack atTime:nextClipStartTime error:nil];
+		}
+        
 		// Note: This is largely equivalent:
 		// [composition insertTimeRange:timeRangeInAsset ofAsset:asset atTime:nextClipStartTime error:NULL];
 		// except that if the video tracks dimensions do not match, additional video tracks will be added to the composition.
