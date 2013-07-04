@@ -50,11 +50,12 @@
 #import <UIKit/UIKit.h>
 
 #import "SimpleEditor.h"
+#import "VEMediaPickerViewController.h"
 
 @class AssetBrowserController;
 @class AVURLAsset;
 
-@interface ProjectViewController : UITableViewController {
+@interface ProjectViewController : UITableViewController<AssetBrowserAlbumControllerDelegate> {
 	UINavigationController *_assetBrowser;
 	
 	NSInteger _currentlyChoosingClipForSection;
