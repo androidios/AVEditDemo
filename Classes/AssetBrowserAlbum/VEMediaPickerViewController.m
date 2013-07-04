@@ -17,9 +17,9 @@
 
 @synthesize delegate = _delegate;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
         VECollectionViewLayout *flowLayout = [[VECollectionViewLayout alloc] init];
@@ -27,7 +27,8 @@
         flowLayout.minimumInteritemSpacing = 3;
         flowLayout.minimumLineSpacing = 4;
         flowLayout.sectionInset = UIEdgeInsetsMake(4, 4, 4, 4);
-        flowLayout.footerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, 40);
+        flowLayout.footerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, 80);
+        flowLayout.headerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, 60);
         
         self = [super initWithCollectionViewLayout:flowLayout];
         
@@ -160,7 +161,6 @@
 {
     ALAsset *asset = [self.usingAssetArray objectAtIndex:indexPath.row];
     NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
-    NSString *type = [asset valueForProperty:ALAssetPropertyType];
     
     NSLog(@"[ny] asset: %@",url);
     
